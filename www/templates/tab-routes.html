@@ -2,19 +2,28 @@
   <ion-content class="padding">
     <p>Escolha o ponto de partida e chegada para calcular a rota</p>
     <div class="list">
-      <label class="item item-input">
-        <input ion-autocomplete type="text" readonly="readonly" class="ion-autocomplete" autocomplete="off" ng-model="model" placeholder="Partida"
-             max-selected-items="1"
-             select-items-label="Selecione o endereço"
-             select-items-label="Selecione o endereço"
-             cancel-label="Cancelar"
-             item-view-value-key="formatted_address"
-             items-method="getAddressSuggestions(query)" />
-      </label>
-      <label class="item item-input">
-        <input type="text" placeholder="Chegada">
-      </label>
-      <button class="button button-block button-positive" type="submit">Buscar rota</button>
+      <form ng-submit="onsubmit(data)">
+        <label class="item item-input">
+          <input ion-autocomplete type="text" readonly="readonly" class="ion-autocomplete" autocomplete="off" ng-model="data.place_takeoff" placeholder="Partida"
+               max-selected-items="1"
+               select-items-label="Selecione o endereço"
+               selected-items-label="Selecionado:"
+               cancel-label="Cancelar"
+               item-view-value-key="formatted_address"
+               items-method="getAddressSuggestions(query)" />
+
+        </label>
+        <label class="item item-input">
+          <input ion-autocomplete type="text" readonly="readonly" class="ion-autocomplete" autocomplete="off" ng-model="data.place_arrival" placeholder="Chegada"
+               max-selected-items="1"
+               select-items-label="Selecione o endereço"
+               selected-items-label="Selecionado:"
+               cancel-label="Cancelar"
+               item-view-value-key="formatted_address"
+               items-method="getAddressSuggestions(query)" />
+        </label>
+        <button class="button button-block button-positive" type="submit">Buscar rota</button>
+      </form>
     </div>
   </ion-content>
 </ion-view>

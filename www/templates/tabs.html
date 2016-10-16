@@ -6,17 +6,17 @@ navigation history that also transitions its views in and out.
 <ion-tabs class="tabs-icon-top tabs-color-active-positive">
 
   <!-- Dashboard Tab -->
-  <ion-tab title="Buscar Rotas" icon-off="ion-ios-navigate-outline" icon-on="ion-ios-navigate" href="#/tab/routes">
+  <ion-tab title="Buscar Rotas" icon-off="ion-ios-navigate-outline" icon-on="ion-ios-navigate" ui-sref="tab.routes" ui-sref-opts="{reload: true, inherit: false}">
     <ion-nav-view name="tab-routes"></ion-nav-view>
   </ion-tab>
 
   <!-- Chats Tab -->
-  <ion-tab title="Rastreio" icon-off="ion-ios-location-outline" icon-on="ion-ios-location" href="#/tab/track">
+  <ion-tab title="Rastreio" icon-off="ion-ios-location-outline" icon-on="ion-ios-location" ui-sref="tab.track" ui-sref-opts="{reload: true, inherit: false}">
     <ion-nav-view name="tab-track"></ion-nav-view>
   </ion-tab>
 
   <!-- Account Tab -->
-  <ion-tab title="Configurações" icon-off="ion-ios-settings" icon-on="ion-ios-settings-strong" href="#/tab/settings">
+  <ion-tab title="Configurações" icon-off="ion-ios-settings" icon-on="ion-ios-settings-strong" ui-sref="tab.settings" ui-sref-opts="{reload: true, inherit: false}">
     <ion-nav-view name="tab-settings"></ion-nav-view>
   </ion-tab>
 

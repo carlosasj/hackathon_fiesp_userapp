@@ -56,23 +56,23 @@ angular.module('starter', [
   })
 
   .state('tab.routes', {
-      url: '/routes',
-      views: {
-        'tab-routes': {
-          templateUrl: 'templates/tab-routes.html',
-          controller: 'RoutesCtrl'
-        }
+    url: '/routes',
+    views: {
+      'tab-routes': {
+        templateUrl: 'templates/tab-routes.html',
+        controller: 'RoutesCtrl'
       }
-    })
-    .state('tab.routes-detail', {
-      url: '/routes/:query',
-      views: {
-        'routes-detail': {
-          templateUrl: 'templates/routes-detail.html',
-          controller: 'RoutesDetailCtrl'
-        }
+    }
+  })
+  .state('tab.routes-detail', {
+    url: '/details/:takeoff_lat,:takeoff_lng/:arrival_lat,:arrival_lng',
+    views: {
+      'tab-routes': {
+        templateUrl: 'templates/routes-detail.html',
+        controller: 'RoutesDetailCtrl'
       }
-    })
+    }
+  })
 
   .state('tab.settings', {
     url: '/settings',
