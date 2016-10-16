@@ -76,12 +76,12 @@ angular.module('starter.controllers', [])
         });
 
         var request = Convert.optimized_to_waypoints(res);
+        console.log(request);
 
         var directionsService = new google.maps.DirectionsService();
         directionsService.route(request, function(response, status) {
           if (status == 'OK') {
             // Display the route on the map.
-            console.log(response);
             directionsDisplay.setDirections(response);
           }
         });
