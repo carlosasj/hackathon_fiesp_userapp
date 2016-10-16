@@ -38,13 +38,14 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('RoutesDetailCtrl', function($scope, $stateParams, $ionicLoading, $http) {
+.controller('RoutesDetailCtrl', function($scope, $stateParams, $ionicLoading, $http, Convert) {
   var url = 'http://162.243.123.47:8080/otp/routers/default/plan';
   var now = new Date();
   var params = {
     'fromPlace': $stateParams.takeoff_lat+','+$stateParams.takeoff_lng,
     'toPlace': $stateParams.arrival_lat+','+$stateParams.arrival_lng,
-    'time': now.getHours()+":"+now.getMinutes(),
+    // 'time': now.getHours()+":"+now.getMinutes(),
+    'time': '6:15',
     'date': now.toISOString().slice(0,10),
     'mode': 'TRANSIT,WALK',
     'maxWalkDistance': '500.0',
@@ -57,6 +58,34 @@ angular.module('starter.controllers', [])
         $scope.result = "FAIL";
       } else {
         $scope.result = "SUCCESS";
+
+        var map = new google.maps.Map(document.getElementById('map'));
+        map.fitBounds(new google.maps.LatLngBounds(
+          new google.maps.LatLng(
+            res.data.plan.from.lat,
+            res.data.plan.from.lon
+          ),
+          new google.maps.LatLng(
+            res.data.plan.to.lat,
+            res.data.plan.to.lon
+          )
+        ));
+
+        var directionsDisplay = new google.maps.DirectionsRenderer({
+          map: map
+        });
+
+        var request = Convert.optimized_to_waypoints(res);
+
+        var directionsService = new google.maps.DirectionsService();
+        directionsService.route(request, function(response, status) {
+          if (status == 'OK') {
+            // Display the route on the map.
+            console.log(response);
+            directionsDisplay.setDirections(response);
+          }
+        });
+
       }
     },
     function (res) {
