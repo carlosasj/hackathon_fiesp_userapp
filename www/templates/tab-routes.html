@@ -3,7 +3,13 @@
     <p>Escolha o ponto de partida e chegada para calcular a rota</p>
     <div class="list">
       <label class="item item-input">
-        <input type="text" placeholder="Partida">
+        <input ion-autocomplete type="text" readonly="readonly" class="ion-autocomplete" autocomplete="off" ng-model="model" placeholder="Partida"
+             max-selected-items="1"
+             select-items-label="Selecione o endereço"
+             select-items-label="Selecione o endereço"
+             cancel-label="Cancelar"
+             item-view-value-key="formatted_address"
+             items-method="getAddressSuggestions(query)" />
       </label>
       <label class="item item-input">
         <input type="text" placeholder="Chegada">
