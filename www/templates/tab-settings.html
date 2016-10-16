@@ -1,6 +1,53 @@
 <ion-view view-title="Configurações">
   <ion-content class="padding">
-    <h2>Mude as configurações</h2>
-    <p>Aqui o usuário poderá alterar configurações, por exemplo, permitir ou não ser rastreado, e se o app terá notificações sonoras e vibração.</p>
+    <h3>configurações</h3>
+    <ul class="list">
+
+      <li class="item item-toggle">Incluir Metrô
+         <label class="toggle">
+           <input type="checkbox" checked><div class="track"><div class="handle"></div></div>
+         </label>
+      </li>
+
+      <li>
+        <label class="item item-input item-select">
+          <div class="input-label">Permitir caminhadas</div>
+          <select>
+            <option>não permitir</option>
+            <option selected>até 100m</option>
+            <option>até 250m</option>
+            <option>até 500m</option>
+            <option>acima de 500m</option>
+          </select>
+        </label>
+      </li>
+
+      <li>
+        <label class="item item-input item-select">
+          <div class="input-label">Moldar o aplicativo para deficiência</div>
+          <select>
+            <option>visual</option>
+            <option selected>motora</option>
+            <option>mental</option>
+          </select>
+        </label>
+      </li>
+
+    </ul>
+
+    <ul class="list">
+
+      <li class="item item-toggle">Habilitar sons
+         <label class="toggle">
+           <input type="checkbox"><div class="track"><div class="handle"></div></div>
+         </label>
+      </li>
+      <li class="item item-toggle">Habilitar vibração
+         <label class="toggle">
+           <input type="checkbox" checked><div class="track"><div class="handle"></div></div>
+         </label>
+      </li>
+
+    </ul>
   </ion-content>
 </ion-view>

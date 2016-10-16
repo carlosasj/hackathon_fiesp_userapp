@@ -41,19 +41,41 @@ angular.module('starter.controllers', [])
 .controller('RoutesDetailCtrl', function($scope, $stateParams, $ionicLoading, $http, Convert) {
   var url = 'http://162.243.123.47:8080/otp/routers/default/plan';
   var now = new Date();
+  $scope.marker = null;
+
   var params = {
     'fromPlace': $stateParams.takeoff_lat+','+$stateParams.takeoff_lng,
     'toPlace': $stateParams.arrival_lat+','+$stateParams.arrival_lng,
-    // 'time': now.getHours()+":"+now.getMinutes(),
     'time': '6:15',
     'date': now.toISOString().slice(0,10),
     'mode': 'TRANSIT,WALK',
     'maxWalkDistance': '500.0',
     'wheelchair': 'false'
   };
+
+  $scope.bus_position = null;
+
+  var update_bus_position = function() {
+    setTimeout(function () {
+      $http.get("http://162.243.123.47/bus-position/").then(
+        function (resp) {
+          var pair = resp.data.split(',');
+          $scope.bus_position = {lat: parseFloat(pair[0]), lng: parseFloat(pair[1])};
+        }, function (resp) {}
+      )['finally'](function () {
+        return update_bus_position();
+      });
+    }, 1500);
+  };
+
+  update_bus_position();
+
+  $scope.get_bus_position = function () {
+    return $scope.bus_position;
+  };
+
   $http.get(url,{params: params}).then(
     function (res) {
-      console.log(res.data);
       if (res.data.error) {
         $scope.result = "FAIL";
       } else {
@@ -71,9 +93,22 @@ angular.module('starter.controllers', [])
           )
         ));
 
-        var directionsDisplay = new google.maps.DirectionsRenderer({
-          map: map
+        $scope.$watch($scope.get_bus_position, function (newval) {
+          if ($scope.marker) {
+            $scope.marker.setMap(null);
+          }
+
+          if (newval) {
+            $scope.marker = new google.maps.Marker({
+              position: {lat: newval.lat, lng: newval.lng},
+              map: map,
+              icon: "img/marker.png"
+            });
+          }
+
         });
+
+        var directionsDisplay = new google.maps.DirectionsRenderer({map: map});
 
         var request = Convert.optimized_to_waypoints(res);
         console.log(request);
