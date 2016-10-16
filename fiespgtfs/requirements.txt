@@ -1,0 +1,4 @@
+-e git+https://github.com/google/gtfs-realtime-bindings#egg=gtfs-realtime-bindings&subdirectory=python
+Django==1.10.2
+uWSGI==2.0.14
+
